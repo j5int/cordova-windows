@@ -129,8 +129,7 @@ AppxManifest.get = function (fileName, ignoreCache) {
         }, []).sort();
 
     var prefix = prefixes[prefixes.length - 1];
-    var Manifest = prefix === 'uap' ? Win10AppxManifest : AppxManifest;
-    var result = new Manifest(fileName, prefix);
+    var result = prefixes.indexOf('uap') !== -1 ? new Win10AppxManifest(fileName) : new AppxManifest(fileName, prefix);
 
     if (!ignoreCache) {
         manifestCache[fileName] = result;
